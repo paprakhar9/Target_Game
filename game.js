@@ -5,6 +5,10 @@ let score = 0;
 const target = document.getElementById('target');
 const gameArea = document.getElementById('gameArea');
 const scoreDisplay = document.getElementById('score');
+const stopBtn = document.getElementById('stopBtn');
+const restartBtn = document.getElementById('restartBtn');
+
+let gameActive = true;
 
 // Function to get responsive target size
 function getTargetSize() {
@@ -42,7 +46,23 @@ function updateScore() {
 
 // Handle target click
 target.addEventListener('click', function() {
+    if (!gameActive) return;
     updateScore();
+    positionTarget();
+});
+
+// Stop button functionality
+stopBtn.addEventListener('click', function() {
+    gameActive = false;
+    target.style.display = 'none';
+});
+
+// Restart button functionality
+restartBtn.addEventListener('click', function() {
+    score = 0;
+    scoreDisplay.textContent = score;
+    gameActive = true;
+    target.style.display = 'block';
     positionTarget();
 });
 
